@@ -23,11 +23,14 @@ Scrapy documentation:
 http://scrapy.org/doc/  
 MongoDB documentation:  
 https://docs.mongodb.org/manual/  
+react:  
+https://www.dropbox.com/s/jmdveksujzp3utp/20160206React.mov?dl=0  
+https://www.dropbox.com/s/s1pnpkgzkoykbf9/20160206AppStoreinReact.pdf?dl=0  
 # Language & Framework  
 javascript,  
 python, scrapy framework,  
 mongoDB  
 react  
 # Owner
-@Team Mongoose  
+@Team: Mongoose  
 @Members: @xinyzhang9, @ztsuperman, @CcWang, @shine715, @jiaqingTang, @aibreania
