@@ -1,0 +1,7 @@
+<% content_for :left_column do %>
+<% if  @movies %>
+  <div >
+     <p><%=@movies['results'][0]['title']%>
+  </div>
+<%end %>
+<%end %>

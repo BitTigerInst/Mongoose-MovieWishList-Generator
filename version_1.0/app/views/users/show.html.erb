@@ -1,0 +1,127 @@
+<h2>User dashboard</h2>
+<% content_for :jquery1 do %>
+   $.get('/users/wishlist',function(data){
+   $("#result").html(data.top)
+})
+
+$('img').click(function(event){
+      event.preventDefault(); 
+      movie_id = $(this).attr('id')
+      movie_title = $(this).attr('alt')
+      movie_genre_ids = $(this).attr('genreids')
+      movie_pic = $(this).attr('src')
+
+      $.ajax({
+        url:"/users/carts",
+        data:{
+          movie_id:movie_id,
+          movie_title:movie_title,
+          movie_genre_ids:movie_genre_ids,
+          movie_pic:movie_pic,
+          from:"ajax"
+         
+      },
+         type: 'POST',
+        success: function(res){
+          //$("#user_cart").html(res.movie_title_list);
+          $("#ajax_result").html(res.msg);
+          location.reload()
+      }
+
+    })
+    //return false;
+  })
+
+<% end %>
+
+<div>
+	<h4>Your favorite genre of movie is: <span id = "result"></span> </h4>
+	<% if session[:top_genre_id] %>
+		<a href="/apis/get_top_genre_movie/<%=session[:top_genre_id]%>" class = 'btn btn-success'>I'm feeling lucky</a>
+	<%end%>
+	<a href="/users/want_watch/<%=current_user.id%>" class = "btn btn-info">My Wish List</a>
+</div>
+<div class="container col-sm-12">
+   <div class='col-sm-8'>
+   </div>
+  <div class="row col-sm-12">
+  <% if  $recommended_movies %>
+      <div class="col-sm-8" >
+        <% $recommended_movies['results'].each do |m| %>
+        <div class="col-sm-6">
+          <h3><%=m['title']%></h3>
+          <a href="#" data-toggle="popover" data-html ='true' title="<h4>Movie Overview</h4>" data-placement="bottom" data-trigger="focus" data-content="<p><b><%=m['overview']%></b></p>">
+          <img src='http://image.tmdb.org/t/p/w500<%= m['poster_path'] %>' alt="<%=m['title']%>"width="300" id="<%=m['id']%>" genreids = "<%=m['genre_ids']%>"/>
+          </a>
+          <div class = "action">
+          	<table>
+          		<tr>
+          			<td>
+          				<% if @temps.find_by_movie_id(m['id']) == nil%>
+				          	<form action="/users/carts" method = "post">
+				          		<input type="hidden" name = "authenticity_token" value = "<%=form_authenticity_token%>">
+				          		<input type="hidden" name = "movie_title" value = "<%=m['title']%>">
+				          		<input type="hidden" name = "movie_id" value = "<%=m['id']%>">
+				          		<input type="hidden" name = "movie_genre_ids" value = "<%=m['genre_ids']%>">
+				          		<input type="hidden" name = "movie_pic" value = "http://image.tmdb.org/t/p/w500<%= m['poster_path'] %>">
+				          		<input type="hidden" name = "from" value = "form">
+				          		<input type="submit" value = "like" class = "btn btn-primary">
+				          	</form>
+			          	<% else %>
+				          	<form action = "/temps/<%=m['id']%>" method = "post">
+				              <input type="hidden" name = "authenticity_token" value = "<%=form_authenticity_token%>">
+				              <input type="hidden" name = "_method" value = "delete">
+				              <input type="submit" value = "unlike" class = "btn btn-danger">    
+				            </form>
+			            <%end%>
+          			</td>
+          			<td>
+          				<% if @wantwatch %>
+			            	<% if !@wantwatch.list.include?m['id'] %>
+				            	<form action="/users/add_to_want_watch/<%=m['id']%>" method = "post">
+					          		<input type="hidden" name = "authenticity_token" value = "<%=form_authenticity_token%>">		
+					          		<input type="submit" value = "want" class = "btn btn-warning">
+					          	</form>
+				          	<% end%>
+				         <%end%>
+          			</td>
+          			<td>
+          				
+          			</td>
+          		</tr>
+          	</table>
+          	
+            
+          </div>
+        </div>
+        <%end%>
+      </div>
+  <%end%>
+	<div class="row col-sm-4">
+	    <div id = 'user_cart'>
+	      <% if session[:temps] %>
+	      <label for="cart">your liked movies</label>
+	      <table class = "table" id = "cart">
+	        <tr>
+	          <th>movie</th>
+	          <th>action</th>
+	        </tr>
+	        <% session[:temps].each do |t|%>
+	        <tr>
+	          <td> <img src="<%=t.pic%>" alt="p" width = "100"> </td>
+	          <td>
+	            <form action = "/temps/<%=t.id%>" method = "post">
+	              <input type="hidden" name = "authenticity_token" value = "<%=form_authenticity_token%>">
+	              <input type="hidden" name = "_method" value = "delete">
+	              <input type="submit" value = "remove" class = "btn btn-danger">  
+	            </form>
+	          </td>
+	        </tr>
+	        <%end%>
+	      </table>
+	        
+	      <%end%>
+	    </div>
+	</div>
+  </div>
+</div>

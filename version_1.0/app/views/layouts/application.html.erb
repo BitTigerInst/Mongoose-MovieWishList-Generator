@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MovieWishList</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    <%= yield :jquery %>
+    <%= yield :jquery1 %>
+  });
+</script>
+
+</head>
+<body>
+<%if flash[:errors]%>
+  <%flash[:errors].each do |e|%>
+    <p><%=e%></p>
+  <%end%>
+<%end%>
+<div class = "container">
+<h1>Welcome
+  <%if current_user%>
+  , <%=current_user.first_name%></h1>
+    <form action='/session' method='post'>
+      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type='hidden' name='_method' value='delete'>
+      <input type='submit' value='Log Out' class = "btn btn-danger">
+    </form>
+  <%else%>
+    !</h1>
+  </div>
+  <%end%>
+<%= yield %>
+
+</body>
+</html>

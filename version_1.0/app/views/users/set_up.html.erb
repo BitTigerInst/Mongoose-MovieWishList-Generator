@@ -1,0 +1,94 @@
+<% content_for :jquery do %>
+
+    $('[data-toggle="popover"]').popover();
+
+    $('img').click(function(event){
+      event.preventDefault(); 
+      movie_id = $(this).attr('id')
+      movie_title = $(this).attr('alt')
+      movie_genre_ids = $(this).attr('genreids')
+      movie_pic = $(this).attr('src')
+      $.ajax({
+        url:"/users/carts",
+        data:{
+          movie_id:movie_id,
+          movie_title:movie_title,
+          movie_genre_ids:movie_genre_ids,
+          movie_pic:movie_pic,
+          from:"ajax"
+         
+      },
+         type: 'POST',
+        success: function(res){
+          //$("#user_cart").html(res.movie_title_list);
+          $("#ajax_result").html(res.msg);
+          location.reload()
+      }
+
+    })
+    //return false;
+  })
+<% end%>
+<div class="container col-sm-12">
+   <h1>Please pick your favorite movies</h1>
+    <div id='ajax_result'></div>
+   <div class='col-sm-8'>
+    <% if $counter >=2%>
+      <form action="/apis/top_moive/prev" method="get" class='col-sm-2'>
+        <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
+
+        <input type="submit" class="btn btn-primary" value="previous page">
+      </form>
+    <%end%>
+    <form action="/apis/top_moive/next" method="get" class='col-sm-2'>
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
+      <input type="submit" class="btn btn-primary" value="next page">
+    </form>
+    <a href="/users/<%=current_user.id%>" class='btn btn-info'>Dashboard</a>
+   </div>
+  <div class="row col-sm-12">
+  <% if  $movies %>
+      <div class="col-sm-8" >
+        <% $movies['results'].each do |m| %>
+        <div class="col-sm-6">
+          <h3><%=m['title']%></h3>
+          <a href="#" data-toggle="popover" data-html ='true' title="<h4>Movie Overview</h4>" data-placement="bottom" data-trigger="focus" data-content="<p><b><%=m['overview']%></b></p>">
+          <img src='http://image.tmdb.org/t/p/w500<%= m['poster_path'] %>' alt="<%=m['title']%>"width="300" id="<%=m['id']%>" genreids = "<%=m['genre_ids']%>"/>
+          </a>
+        </div>
+        <%end%>
+      </div>
+  <%end%>
+  <div class="row col-sm-4">
+    <div id = 'user_cart'>
+      <% if session[:temps] %>
+      <label for="cart">your liked movies</label>
+      <table class = "table" id = "cart">
+        <tr>
+          <th>movie</th>
+          <th>action</th>
+        </tr>
+        <% session[:temps].each do |t|%>
+        <tr>
+          <td> <img src="<%=t.pic%>" alt="p" width = "100"> </td>
+          <td>
+            <form action = "/temps/<%=t.id%>" method = "post">
+              <input type="hidden" name = "authenticity_token" value = "<%=form_authenticity_token%>">
+              <input type="hidden" name = "_method" value = "delete">
+              <input type="submit" value = "remove" class = "btn btn-danger">
+                  
+            </form>
+          </td>
+        </tr>
+        <%end%>
+      </table>
+        
+      <%end%>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+ 
