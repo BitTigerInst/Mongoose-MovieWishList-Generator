@@ -11,4 +11,10 @@ import scrapy
 class DoubanItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    title = scrapy.Field()
+    info = scrapy.Field()
+    rating = scrapy.Field()
+    watched_count = scrapy.Field()
+    wish_count = scrapy.Field()
+    recomend_list = scrapy.Field()
+    tags_list = scrapy.Field()
