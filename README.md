@@ -1,4 +1,18 @@
 # Mongoose-MovieWishList-Generator  
+# Update report  
+Since douban.com has set cralwer-prevent technology, so we had to switch to use APIs from TMDb (The Movie Databases) to get info of movies.  
+We use React as the view and rails as our backend framework.  
+Updated features:  
+1. User login and rigisteration.  
+2. User pick up some movies from lists and the system determines his favorite genre.  
+3. System renders some movies based on user's taste. User can pick up movies and add to his own wishlist.  
+4. User can click "I am feeling lucky" to change movie recommend list.  
+5. User can click "Discover More" to see recommended movies from other genres.  
+
+#Future plan  
+1.Compare users' wishlists and suggest friends to user with high similarities.    
+2.Display movie details in a new page or pop-over.  
+3.Let user discover movies on show in theatres nearby.  
 # Description  
 Movie is one of the hottest entertaiment for people nowadays. However,in most cases, it's not easy to find the right movie to watch. And people are usually not active to build their own movie wish list. So we are going to make one for them. Based on the analysis of movie databases from douban.com, we can generate the proper wish list for one particular user. It can be developed further to be a promotion for other movies.
 
@@ -27,10 +41,11 @@ react:
 https://www.dropbox.com/s/jmdveksujzp3utp/20160206React.mov?dl=0  
 https://www.dropbox.com/s/s1pnpkgzkoykbf9/20160206AppStoreinReact.pdf?dl=0  
 # Language & Framework  
+Ruby on Rails
 javascript,  
-python, scrapy framework,  
-mongoDB  
+python, scrapy framework(aborted),  
+mongoDB=>postgresql  
 react  
 # Owner
 @Team: Mongoose  
-@Members: @xinyzhang9, @ztsuperman, @CcWang, @shine715, @jiaqingTang, @aibreania
+@Contributers: xinyzhang9,CcWang
