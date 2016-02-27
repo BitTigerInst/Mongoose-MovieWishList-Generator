@@ -1,5 +1,5 @@
 # Mongoose-MovieWishList-Generator  
-# Update report  
+# Update report on Feb 26, 2016  
 Since douban.com has set cralwer-prevent technology, so we had to switch to use APIs from TMDb (The Movie Databases) to get info of movies.  
 We use React as the view and rails as our backend framework.  
 Updated features:  
