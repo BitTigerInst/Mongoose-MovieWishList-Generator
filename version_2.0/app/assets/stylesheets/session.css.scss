@@ -1,0 +1,24 @@
+// Place all the styles related to the session controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background-image:url(/assets/bacground.jpg);
+  
+}
+
+
+input[type="text"]
+{
+    background: transparent;
+    border: none;
+}
+input[type="email"]
+{
+    background: transparent;
+    border: none;
+}
+input[type="password"]
+{
+    background: transparent;
+    border: none;
+}

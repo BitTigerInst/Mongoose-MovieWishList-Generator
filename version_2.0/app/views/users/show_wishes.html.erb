@@ -1,0 +1,16 @@
+
+<h1>Wish List</h1>
+<a href="/users/<%=current_user.id%>"><button class="btn btn-info">Go Back</button></a>
+<div class="col-sm-12">
+  <% @wishes.each do |w| %>
+    <div class="col-sm-4">
+      <h4><%=w.title%></h4>
+      <img src="http://image.tmdb.org/t/p/w500<%=w.pic%>" width="300">
+      <form action="/users/<%=w.id%>" method='post'>
+        <input type="hidden" name="_method" value="delete"></input>
+        <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input><br>
+        <input type="submit" value="Remove" class="btn btn-danger"></input>
+      </form>
+    </div>
+  <%end%>
+</div>

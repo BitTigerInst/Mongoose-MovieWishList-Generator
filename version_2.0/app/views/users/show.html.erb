@@ -1,0 +1,13 @@
+<div>
+ 
+  <div class="btn-group" role="group">
+    <h3 >Your favorite kind of movie is: <span class="blue" ><%=@fav_kind.name%></span> </h3>
+    <a href="/users/favs/<%=current_user.id%>"><button class="btn btn-warning"  type="button">See your favorite movies</button></a>
+ 
+ 
+    <a href="/users/wish/<%=current_user.id%>"><button class="btn btn-warning" type="button">See your wish movies lists</button></a>
+  </div>
+</div>
+   <%= react_component('Recommend', 
+                      {:movies => @recommended_movies,  :user_id => @user_id},
+                      {:prerender=>true} ) %>

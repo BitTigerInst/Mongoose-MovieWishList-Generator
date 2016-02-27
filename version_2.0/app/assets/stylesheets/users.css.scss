@@ -1,0 +1,11 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.unclick{
+  opacity: 0.4;
+  pointer-events: none //This line is the key!
+}
+.blue {
+  color: white;
+  font-style: italic;
+}
