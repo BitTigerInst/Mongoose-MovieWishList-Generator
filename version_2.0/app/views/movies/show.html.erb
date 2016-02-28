@@ -1,0 +1,32 @@
+
+<h2>Movie detail   <a href="/users/<%=current_user.id%>"><button class="btn btn-info">Go Back</button></a></h2>
+
+</br>
+<div class="col-sm-12">
+    <div class="col-sm-8">
+    	<table class = 'table'>
+    		<tr>
+    			<td><h3><%=@movie['original_title']%></h3></td>
+    		</tr>
+    		<tr>
+    			<td> <img src="http://image.tmdb.org/t/p/w500<%=@movie['poster_path']%>" width="300"></td>
+    			<td> 
+    				<h3><u>Overview:</u></h3>
+    				<p><b><%=@movie['overview']%></b></p>
+    				<br>
+    				<p><b>Release Date: </b> <%=@movie['release_date']%></p>
+    				<p><b>vote average: </b><%=@movie['vote_average']%></p>
+    				<p><b>vote count: </b><%=@movie['vote_count']%></p>
+    				<p>
+    					<b>Languages: </b>
+	    				<% @movie['spoken_languages'].each do |l| %>
+	    				<%=l['name']  %>
+	    				<%end%>
+    				</p>
+    				<p><i><%=@movie['tagline']%></i></p>
+    			</td>
+    		</tr>
+    	</table>
+      
+    </div>
+</div>

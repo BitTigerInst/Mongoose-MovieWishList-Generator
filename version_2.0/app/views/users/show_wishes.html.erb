@@ -5,7 +5,7 @@
   <% @wishes.each do |w| %>
     <div class="col-sm-4">
       <h4><%=w.title%></h4>
-      <img src="http://image.tmdb.org/t/p/w500<%=w.pic%>" width="300">
+      <img src="http://image.tmdb.org/t/p/w500<%=w.pic%>" width="300" onclick="document.location='/movies/<%=w.movie_id%>';return false;">
       <form action="/users/<%=w.id%>" method='post'>
         <input type="hidden" name="_method" value="delete"></input>
         <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input><br>

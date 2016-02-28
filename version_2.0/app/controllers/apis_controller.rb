@@ -39,4 +39,6 @@ class ApisController < ApplicationController
       user = current_user.id.to_json
      render :json => JSON.load(data)['results']
   end
+
+
 end
