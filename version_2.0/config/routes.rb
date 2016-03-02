@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  root 'session#index'
   get 'movies/:id' => 'movies#show'
 
-  root 'session#index'
   get 'session' =>'session#index'
   get 'session/create'
 

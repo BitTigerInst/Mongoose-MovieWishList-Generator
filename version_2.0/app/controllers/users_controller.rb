@@ -26,6 +26,9 @@ class UsersController < ApplicationController
   def show
     fav_lists = current_user.fav_kinds.group(:genre_id).count
     top_fav = fav_lists.key(fav_lists.values.max)
+    if top_fav == nil
+      top_fav = 18
+    end
     @fav_kind = Genre.find_by_genre_id(top_fav)
     lucky_number = rand(1..10)
     get_top_genre_movie ="http://api.themoviedb.org/3/genre/"+top_fav.to_s+"/movies?api_key="+APP_ID
@@ -48,6 +51,7 @@ class UsersController < ApplicationController
 
   end
 
+#save movie to user fav_movies table, movies table,and user fav_kinds table
   def carts
 
     # puts params[:favs].inspect
@@ -64,7 +68,7 @@ class UsersController < ApplicationController
       if current_user.fav_movies.find_by_movie_id(movie_id) == nil
         FavList.create(user:current_user, movie:Movie.find_by_movie_id(movie_id))  
         movie_genre_ids.each do |g|
-          FavKind.create(user:current_user, genre_id:g)
+          FavKind.create(user:current_user, genre_id:g, movie_id:movie_id)
         end
       end
     end
@@ -104,9 +108,12 @@ class UsersController < ApplicationController
   end
 
   def remove_favs
-
+  
+    #remove from fav_lists
     if current_user.fav_lists.find_by_movie_id(params[:id])
-     current_user.fav_lists.find_by_movie_id(params[:id]).destroy
+      id = Movie.find(params[:id]).movie_id
+      current_user.fav_kinds.where("movie_id = #{id}").destroy_all
+      current_user.fav_lists.find_by_movie_id(params[:id]).destroy
     end
     redirect_to :back
     

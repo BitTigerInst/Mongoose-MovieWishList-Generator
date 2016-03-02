@@ -11,12 +11,12 @@ class SessionController < ApplicationController
   		redirect_to "/users/#{current_user.id}"
   	else
   		flash[:errors] = ['Invalid combination']
-  		redirect_to "/session"
+  		redirect_to "/"
   	end
   end
 
   def destroy
   	reset_session
-  	redirect_to "/session"
+  	redirect_to "/"
   end
 end
