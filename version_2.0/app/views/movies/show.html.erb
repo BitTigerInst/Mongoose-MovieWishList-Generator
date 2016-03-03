@@ -3,6 +3,9 @@
 
 </br>
 <div class="col-sm-12">
+<div>
+  <p><%=@movie_images%></p>
+</div>
     <div class="col-sm-8">
     	<table class = 'table'>
     		<tr>
@@ -25,8 +28,18 @@
     				</p>
     				<p><i><%=@movie['tagline']%></i></p>
     			</td>
+          <td>
+            
+          </td>
     		</tr>
     	</table>
       
     </div>
+    <div class="col-sm-8">
+        <%if @movie_trailer['site'] == 'YouTube' %>
+          <iframe width="80%"  height="345" 
+            src="http://www.youtube.com/embed/<%=@movie_trailer['key']%>">
+          </iframe>
+        <% end %>
+      </div>
 </div>

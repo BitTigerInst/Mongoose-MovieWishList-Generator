@@ -117,11 +117,11 @@ var Movie = React.createClass({
 
   render(){
     var imgStyle = {
+      margin: "5",
       opacity: this.props.isFav ? 0.4 : 1.0
     };
     return(
       <div className="col-sm-6" >
-        <h4>{this.props.movie.title}</h4>
         <img 
           src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path} 
           style={imgStyle}
@@ -159,6 +159,7 @@ var UserList = React.createClass({
 })
 
 var UserMovie = React.createClass({
+ 
   _onClick(e) {
     this.props.onClick(this.props.movie);
   },
@@ -169,7 +170,7 @@ var UserMovie = React.createClass({
       <p></p>
         <img 
           src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path} 
-          width="150" 
+          width="300" 
           onClick={this._onClick}
         />
         
