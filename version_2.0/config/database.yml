@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: movie_wish_list_production
-  username: movie_wish_list
+  username: ubuntu
   password: <%= ENV['MOVIE_WISH_LIST_DATABASE_PASSWORD'] %>
