@@ -2,18 +2,18 @@
 <div class = "container">
   <br>
 	<fieldset>
-	<legend>Login</legend>
+	<legend><span class = "label">Login >></span></legend>
 	<form action="/session" method = "post" class="form-inline">
 		<input type="hidden" name = "authenticity_token" value = "<%=form_authenticity_token%>">
 		<div class="form-group">
-			<label for="email">Email</label>
+			<label for="email"><span class = "label">Email</span></label>
 		<input type="text" name = "email" id = "email">
 	</div>
 		<div class="form-group">
-			<label for="password">Password</label>
+			<label for="password"><span class = "label">Password</span></label>
 		<input type="password" name = "password" id = "password">
 	</div>
-		<input type="submit" class = "btn btn-default" value = "Login">
+		<input type="submit" class = "btn btn-danger" value = "Login">
 
 	</form>
 </fieldset>
@@ -21,25 +21,25 @@
 </br>
 <div class = "container">
 	<fieldset>
-	<legend>Register</legend>
+	<legend><span class = "label">Register >></span></legend>
 	<form action="/users" method = "post">
 
 		<input type="hidden" name = "authenticity_token" value = "<%=form_authenticity_token%>">
 	<div class="form-group">
-		<label for="first_name">First Name</label>
+		<label for="first_name"><span class = "label">First Name</span></label>
 		<input type="text" class="form-control" name = "user[first_name]" id = "first_name">
 
 	</div>
-	<div class="form-group">	<label for="last_name">Last Name</label>
+	<div class="form-group">	<label for="last_name"><span class = "label">Last Name</span></label>
 		<input type="text" class="form-control" name = "user[last_name]" id = "last_name">
 
 	</div>
-	<div class="form-group">	<label for="email">Email</label>
+	<div class="form-group">	<label for="email"><span class = "label">Email</span></label>
 		<input type="text" class="form-control" name = "user[email]" id = "email">
 
 	</div>
 
-	<div class="form-group">	<label for="password">Password</label>
+	<div class="form-group">	<label for="password"><span class = "label">Password</span></label>
 		<input type="password" class="form-control" name = "user[password]" id = "password">
 		<br>
 		*Password should be at least 8 characters
@@ -47,7 +47,7 @@
 	</div>
 
    	<div class="form-group">
-		<label for="password_confirmation">Confirm PW</label>
+		<label for="password_confirmation"><span class = "label">Confirm Password</span></label>
    		<input type="password" class="form-control" name="user[password_confirmation]">
 
 	</div>
