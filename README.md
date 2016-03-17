@@ -2,7 +2,7 @@
 # Update report on Feb 26, 2016  
 Since douban.com has set cralwer-prevent technology, so we had to switch to use APIs from TMDb (The Movie Databases) to get info of movies.  
 We use React as the view and rails as our backend framework.
-Demo viedo is available on https://youtu.be/jEH8kNnmaAg
+Demo viedo is available on https://youtu.be/oTXdoxWeIZo
 #Updated features:  
 1. User login and registeration with validation.  
 2. User pick up some top rated movies from lists and the system determines his favorite genre. 
