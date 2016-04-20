@@ -168,7 +168,7 @@ var UserMovie = React.createClass({
 
   render(){
     return(
-     <div className="col-sm-6" >
+     <div className="col-sm-6 " >
       <p></p>
         <img
           src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path}
