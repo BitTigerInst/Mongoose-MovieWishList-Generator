@@ -13,12 +13,15 @@
 
 </head>
 <body>
-<%if flash[:errors]%>
-  <%flash[:errors].each do |e|%>
-    <p><%=e%></p>
-  <%end%>
-<%end%>
 <div class = "container">
+  <div class="text-center">
+    <h3 class="text-anger"><%if flash[:errors]%>
+    <%flash[:errors].each do |e|%>
+      <p><%=e%></p>
+    <%end%>
+  <%end%></h3>
+</div>
+
 <h1><img id = "logo" src="/assets/logo.png" alt=""></h1>
 <%if current_user%>
   <h4>Hello, <%=current_user.first_name%></h4>
