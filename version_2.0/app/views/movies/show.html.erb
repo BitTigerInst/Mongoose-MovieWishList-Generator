@@ -1,129 +1,14 @@
-<style>
-  #slider {
-  position: relative;
-  overflow: hidden;
-  margin: 20px auto 0 auto;
-  border-radius: 4px;
-  display: inline-block;
-  vertical-align: top;
-}
 
-#slider ul {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  height: 200px;
-  list-style: none;
-}
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
 
-#slider ul li {
-  position: relative;
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-  width: 500px;
-  height: 300px;
-  text-align: center;
-  line-height: 300px;
-}
 
-a.control_prev, a.control_next {
-  position: absolute;
-  top: 40%;
-  z-index: 999;
-  display: block;
-  padding: 4% 3%;
-  width: auto;
-  height: auto;
-  background: #2a2a2a;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 18px;
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-a.control_prev:hover, a.control_next:hover {
-  opacity: 1;
-  -webkit-transition: all 0.2s ease;
-}
-
-a.control_prev {
-  border-radius: 0 2px 2px 0;
-}
-
-a.control_next {
-  right: 0;
-  border-radius: 2px 0 0 2px;
-}
-
-.slider_option {
-  position: relative;
-  margin: 10px auto;
-  width: 160px;
-  font-size: 18px;
-
-}
-td{
-  text-align: center;
-}
-
-#overview{
-  background-color: white;
-  padding: 5px;
-  border-radius: 10px;
-  border: 1px solid gray;
-}
-
-</style>
 <script>
   $(document).ready(function ($) {
-
-  $('#checkbox').change(function(){
-    setInterval(function () {
-        moveRight();
-    }, 3000);
-  });
-
-  var slideCount = $('#slider ul li').length;
-  var slideWidth = $('#slider ul li').width();
-  var slideHeight = $('#slider ul li').height();
-  var sliderUlWidth = slideCount * slideWidth;
-
-  $('#slider').css({ width: slideWidth, height: slideHeight });
-
-  $('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-
-    $('#slider ul li:last-child').prependTo('#slider ul');
-
-    function moveLeft() {
-        $('#slider ul').animate({
-            left: + slideWidth
-        }, 200, function () {
-            $('#slider ul li:last-child').prependTo('#slider ul');
-            $('#slider ul').css('left', '');
-        });
-    };
-
-    function moveRight() {
-        $('#slider ul').animate({
-            left: - slideWidth
-        }, 200, function () {
-            $('#slider ul li:first-child').appendTo('#slider ul');
-            $('#slider ul').css('left', '');
-        });
-    };
-
-    $('a.control_prev').click(function () {
-        moveLeft();
+    $('.try_slider').slick({
+      arrows:true,
+      autoplay:true,
+      autoplaySpeed:1500
     });
-
-    $('a.control_next').click(function () {
-        moveRight();
-    });
-
 });
 </script>
 
@@ -131,28 +16,16 @@ td{
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h2 class="text-success">About this movie...   <a href="/users/<%=current_user.id%>"><button class="btn btn-primary navbar-right">Go Back</button></a></h2>
-        <div class="col-sm-6 text-left">
+      <h2 class="text-success">About this movie... </h2><a href="/users/<%=current_user.id%>"><button class="btn btn-primary navbar-right">Go Back</button></a>
+      <div class="col-sm-6 text-left">
+
 
       			<h3><strong><%=@movie['original_title']%><strong></h3>
 
-      		<img src="http://image.tmdb.org/t/p/w500<%=@movie['poster_path']%>"class="img-responsive">
+      		<img src="http://image.tmdb.org/t/p/w500<%=@movie['poster_path']%>" style="height:auot;"class="img-responsive">
         </div>
-        <div class="col-sm-6">
-          <h3>take a peek</h3>
-          <div id="slider">
-            <a href="#" class="control_next">></a>
-            <a href="#" class="control_prev"><</a>
-            <ul>
-              <% @movie_images.each do |m|%>
-                <li><img src="http://image.tmdb.org/t/p/w500<%=m['file_path']%>" class="img-responsive"></li>
-              <%end%>
-            </ul>
-          </div>
-        </div>
-
+        <div id = "overview" class="col-sm-6">
             <h3>Overview</h3>
-            <div id = "overview" class="col-sm-6" style="width:500px; background-color:transparent;">
               <strong><p><b><%=@movie['overview']%></b></p>
               <p><b>Release Date: </b> <%=@movie['release_date']%></p>
               <p><b>vote average: </b><%=@movie['vote_average']%></p>
@@ -164,7 +37,17 @@ td{
                 <%end%>
               </p>
               <p><i><%=@movie['tagline']%></i></p></strong>
+          </div>
+          <div class="col-sm-6">
+            <h3>take a peek</h3>
+            <div class="try_slider">
+              <% @movie_images.each do |m|%>
+                <div><button type="button" class="slick-prev">Previous</button><img src="http://image.tmdb.org/t/p/w500<%=m['file_path']%>" class="img-responsive">
+                <button type="button" class="slick-next">Next</button></div>
+              <%end%>
             </div>
+          </div>
+
           </div>
             <div class="col-sm-12">
               <h3>Trailer</h3>
@@ -176,8 +59,6 @@ td{
                     <% end %>
               </div>
             </div>
-
-
   </div>
   </div>
 </div>
