@@ -14,17 +14,25 @@
 </head>
 <body>
 <div class = "container">
-  <div class="text-center">
-    <h3 class="text-anger"><%if flash[:errors]%>
-    <%flash[:errors].each do |e|%>
-      <p><%=e%></p>
-    <%end%>
-  <%end%></h3>
-</div>
 
-<h1><img id = "logo" src="/assets/logo.png" alt=""></h1>
+
+<h1><img id = "logo" src="/assets/logo.png" alt="" class="text-center"></h1>
+<div class="text-center">
+    <%if flash[:errors]%>
+    <%flash[:errors].each do |e|%>
+      <h3 style="color:#B11D2E;"><strong><%=e%></strong></h3>
+    <%end%>
+  <%end%>>
+</div>
 <%if current_user%>
   <h4>Hello, <%=current_user.first_name%></h4>
+    <div class="text-center">
+        <%if flash[:errors]%>
+        <%flash[:errors].each do |e|%>
+          <h5 style="color:#B11D2E;"><%=e%></h5>
+        <%end%>
+      <%end%></h5>
+    </div>
     <form action='/session' method='post'>
       <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
       <input type='hidden' name='_method' value='delete'>

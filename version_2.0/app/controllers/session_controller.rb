@@ -10,7 +10,7 @@ class SessionController < ApplicationController
 
   		redirect_to "/users/#{current_user.id}"
   	else
-  		flash[:errors] = ['Invalid combination']
+  		flash[:errors] = ['Email address does not match the password, please try again!']
   		redirect_to "/"
   	end
   end
