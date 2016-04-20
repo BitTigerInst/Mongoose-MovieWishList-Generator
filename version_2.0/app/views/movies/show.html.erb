@@ -1,14 +1,4 @@
-<style>
-#overview{
-  background-color: white;
-  padding: 5px;
-  border-radius: 10px;
-  border: 1px solid gray;
-}
 
-</style>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
 
 
@@ -26,25 +16,16 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h2 class="text-success">About this movie...   <a href="/users/<%=current_user.id%>"><button class="btn btn-primary navbar-right">Go Back</button></a></h2>
-        <div class="col-sm-6 text-left">
+      <h2 class="text-success">About this movie... </h2><a href="/users/<%=current_user.id%>"><button class="btn btn-primary navbar-right">Go Back</button></a>
+      <div class="col-sm-6 text-left">
+
 
       			<h3><strong><%=@movie['original_title']%><strong></h3>
 
-      		<img src="http://image.tmdb.org/t/p/w500<%=@movie['poster_path']%>"class="img-responsive">
+      		<img src="http://image.tmdb.org/t/p/w500<%=@movie['poster_path']%>" style="height:auot;"class="img-responsive">
         </div>
-        <div class="col-sm-6">
-          <h3>take a peek</h3>
-          <div class="try_slider">
-            <% @movie_images.each do |m|%>
-              <div><button type="button" class="slick-prev">Previous</button><img src="http://image.tmdb.org/t/p/w500<%=m['file_path']%>" class="img-responsive">
-              <button type="button" class="slick-next">Next</button></div>
-            <%end%>
-          </div>
-        </div>
-
+        <div id = "overview" class="col-sm-6">
             <h3>Overview</h3>
-            <div id = "overview" class="col-sm-6" style="width:500px; background-color:transparent;">
               <strong><p><b><%=@movie['overview']%></b></p>
               <p><b>Release Date: </b> <%=@movie['release_date']%></p>
               <p><b>vote average: </b><%=@movie['vote_average']%></p>
@@ -56,7 +37,17 @@
                 <%end%>
               </p>
               <p><i><%=@movie['tagline']%></i></p></strong>
+          </div>
+          <div class="col-sm-6">
+            <h3>take a peek</h3>
+            <div class="try_slider">
+              <% @movie_images.each do |m|%>
+                <div><button type="button" class="slick-prev">Previous</button><img src="http://image.tmdb.org/t/p/w500<%=m['file_path']%>" class="img-responsive">
+                <button type="button" class="slick-next">Next</button></div>
+              <%end%>
             </div>
+          </div>
+
           </div>
             <div class="col-sm-12">
               <h3>Trailer</h3>
