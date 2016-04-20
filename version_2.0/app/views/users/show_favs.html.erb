@@ -1,12 +1,12 @@
 
 <h1>Favorite Movie List</h1>
-<a href="/users/<%=current_user.id%>"><button class="btn btn-info">Go Back</button></a>
-<a href="/users/<%=current_user.id%>/set_up"><button class="btn btn-info">Add More Favorite Movies</button></a>
+<a href="/users/<%=current_user.id%>"><button class="btn btn-primary navbar-right">Go Back</button></a>
+<a href="/users/<%=current_user.id%>/set_up"><button class="btn btn-primary">Add More Favorite Movies</button></a>
 <div class="col-sm-12">
   <% @movies.each do |m| %>
     <div class="col-sm-4">
-      <h2><%=m.title%></h2>
-      <img src="http://image.tmdb.org/t/p/w500<%=m.pic%>" width="300" onclick="document.location='/movies/<%=m.movie_id%>';return false;">
+
+      <img src="http://image.tmdb.org/t/p/w500<%=m.pic%>" width="300" class="img-responsive" onclick="document.location='/movies/<%=m.movie_id%>';return false;">
       <form action="/users/fav/<%=m.id%>" method='post'>
         <input type="hidden" name="_method" value="delete"></input>
         <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input><br>

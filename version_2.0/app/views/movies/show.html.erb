@@ -3,7 +3,7 @@
   position: relative;
   overflow: hidden;
   margin: 20px auto 0 auto;
-  border-radius: 4px;
+  border-radius: 1px;
   display: inline-block;
   vertical-align: top;
 }
@@ -86,16 +86,16 @@ td{
         moveRight();
     }, 3000);
   });
-  
+
   var slideCount = $('#slider ul li').length;
   var slideWidth = $('#slider ul li').width();
   var slideHeight = $('#slider ul li').height();
   var sliderUlWidth = slideCount * slideWidth;
-  
+
   $('#slider').css({ width: slideWidth, height: slideHeight });
-  
+
   $('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-  
+
     $('#slider ul li:last-child').prependTo('#slider ul');
 
     function moveLeft() {
@@ -124,39 +124,36 @@ td{
         moveRight();
     });
 
-});    
+});
 </script>
 
-<h2>Movie detail   <a href="/users/<%=current_user.id%>"><button class="btn btn-info">Go Back</button></a></h2>
 
-</br>
-<div class="col-sm-12">
-    <div class="col-sm-8">
-    	<table class = 'table'>
-    		<tr>
-    			<td><h3><%=@movie['original_title']%></h3></td>
-    		</tr>
-    		<tr>
-    			<td> <img src="http://image.tmdb.org/t/p/w500<%=@movie['poster_path']%>" width="300"></td>
-          <td>
-            <h3>ScreenShots</h3>
-            <div id="slider">
-              <a href="#" class="control_next">></a>
-              <a href="#" class="control_prev"><</a>
-              <ul>
-                <% @movie_images.each do |m|%>
-                  <li><img src="http://image.tmdb.org/t/p/w500<%=m['file_path']%>"></li>    
-                <%end%>
-              </ul>  
-            </div>
-          </td>
-    		</tr>
-        <tr>
-          <td> 
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="text-success">About this movie...   <a href="/users/<%=current_user.id%>"><button class="btn btn-primary navbar-right">Go Back</button></a></h2>
+        <div class="col-sm-6 text-left">
+
+      			<h3><strong><%=@movie['original_title']%><strong></h3>
+
+      		<img src="http://image.tmdb.org/t/p/w500<%=@movie['poster_path']%>"class="img-responsive">
+        </div>
+        <div class="col-sm-6">
+          <h3>take a peek</h3>
+          <div id="slider">
+            <a href="#" class="control_next">></a>
+            <a href="#" class="control_prev"><</a>
+            <ul>
+              <% @movie_images.each do |m|%>
+                <li><img src="http://image.tmdb.org/t/p/w500<%=m['file_path']%>" class="img-responsive"></li>
+              <%end%>
+            </ul>
+          </div>
+        </div>
+
             <h3>Overview</h3>
-            <div id = "overview">
-              <p><b><%=@movie['overview']%></b></p>
-              <hr>
+            <div id = "overview" class="col-sm-6" style="width:500px; background-color:transparent;">
+              <strong><p><b><%=@movie['overview']%></b></p>
               <p><b>Release Date: </b> <%=@movie['release_date']%></p>
               <p><b>vote average: </b><%=@movie['vote_average']%></p>
               <p><b>vote count: </b><%=@movie['vote_count']%></p>
@@ -166,27 +163,21 @@ td{
                 <%=l['name']  %>
                 <%end%>
               </p>
-              <p><i><%=@movie['tagline']%></i></p>
+              <p><i><%=@movie['tagline']%></i></p></strong>
             </div>
-            
-          </td>
-          <td>
-            <h3>Trailer</h3>
-            <div id = "trailer">
-                  <%if @movie_trailer['site'] == 'YouTube' %>
-                    <iframe width="100%"  height="345" 
-                      src="http://www.youtube.com/embed/<%=@movie_trailer['key']%>">
-                    </iframe>
-                  <% end %>
+          </div>
+            <div class="col-sm-12">
+              <h3>Trailer</h3>
+              <div id = "trailer">
+                    <%if @movie_trailer['site'] == 'YouTube' %>
+                      <iframe width="100%"  height="555"
+                        src="http://www.youtube.com/embed/<%=@movie_trailer['key']%>">
+                      </iframe>
+                    <% end %>
+              </div>
             </div>
-          </td>
-        </tr>
-    	</table>
-      
-    </div>
-   
+
+
+  </div>
+  </div>
 </div>
-<div class="col-sm-12">
- 
-</div>
- 

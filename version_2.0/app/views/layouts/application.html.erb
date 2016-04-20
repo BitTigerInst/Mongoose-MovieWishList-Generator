@@ -25,7 +25,7 @@
   <%end%>>
 </div>
 <%if current_user%>
-  <h4>Hello, <%=current_user.first_name%></h4>
+  <h4><strong>Hello, <%=current_user.first_name%></strong></h4>
     <div class="text-center">
         <%if flash[:errors]%>
         <%flash[:errors].each do |e|%>

@@ -13,7 +13,7 @@ var Recommend = React.createClass({
     if (movie.id in favs) {
       delete favs[movie.id];
     } else {
-      favs[movie.id] = movie; 
+      favs[movie.id] = movie;
     }
 
     this.setState({
@@ -26,7 +26,7 @@ var Recommend = React.createClass({
   //   if (movie.id in wishes) {
   //     delete wishes[movie.id];
   //   } else {
-  //     wishes[movie.id] = movie; 
+  //     wishes[movie.id] = movie;
   //   }
 
   //   this.setState({
@@ -36,7 +36,7 @@ var Recommend = React.createClass({
 
 
   _lucy(){
-    var page = Math.floor(Math.random() * 25) + 1 
+    var page = Math.floor(Math.random() * 25) + 1
      // var user_id = this.props.user_id
     $.get("/apis/get_wish?page="+page, function(data) {
       this.setState({
@@ -45,7 +45,7 @@ var Recommend = React.createClass({
     }.bind(this));
   },
   _discover(){
-    var page = Math.floor(Math.random() * 100) + 1 
+    var page = Math.floor(Math.random() * 100) + 1
      // var user_id = this.props.user_id
     $.get("/apis/discover?page="+page, function(data) {
       this.setState({
@@ -64,7 +64,7 @@ var Recommend = React.createClass({
       success: function(){
         console.log(user_id);
         location.href = "/users/wish/"+user_id;
-        
+
       }
     });
   },
@@ -74,18 +74,18 @@ var Recommend = React.createClass({
       <div className="col-sm-12">
         <h1>Make Your Movie Wish List</h1>
         <div className='col-sm-8'>
-          <button className='btn btn-info' onClick={this._lucy}>I am Feeling Lucky</button>
-          <button className='btn btn-primary' onClick={this._discover}>Discover More</button>
+          <button className='btn btn-danger navbar-left' onClick={this._lucy}>I am Feeling Lucky</button>
+          <button className='btn btn-primary navbar-right' onClick={this._discover}>Discover More</button>
         </div>
-         <button className="btn btn-success" onClick={this._onSubmitFav}> Set Your List</button>
-        <List 
-          movies={this.state.movies} 
+         <button className="btn btn-success col-sm-offset-2" onClick={this._onSubmitFav}> Set Your List</button>
+        <List
+          movies={this.state.movies}
           updateFavs={this._updateFavs}
           // updateWishes={this._updateWishes}
           favs={this.state.favs}
           // wishes={this.state.wishes}
         />
-         <UserList 
+         <UserList
           updateFavs={this._updateFavs}
           favs={this.state.favs}
           authenticity_token={this.props.authenticity_token}
@@ -109,8 +109,8 @@ var List = React.createClass({
       <div className='col-sm-8'>
         {this.props.movies.map(function(movie, idx) {
           return (
-            <Movie 
-              key={'movie'+idx} 
+            <Movie
+              key={'movie'+idx}
               movie={movie}
               isFav={movie.id in this.props.favs}
               // isWish={movie.id in this.props.Wishes}
@@ -125,7 +125,7 @@ var List = React.createClass({
 });
 
 var Movie = React.createClass({
-  
+
   _onClick(e) {
     this.props.onClick(this.props.movie);
   },
@@ -137,14 +137,14 @@ var Movie = React.createClass({
     var imgStyle = {
       margin: "5",
       opacity: this.props.isFav ? 0.4 : 1.0
-      
+
     };
     return(
       <div className="col-sm-6" >
-        <img 
-          src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path} 
+        <img
+          src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path}
           style={imgStyle}
-          width="300" 
+          width="300"
           onClick={this._onClick}
         />
       </div>
@@ -186,12 +186,12 @@ var UserMovie = React.createClass({
     return(
      <div className="col-sm-6" >
       <p></p>
-        <img 
-          src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path} 
-          width="80%" 
+        <img
+          src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path}
+          width="80%"
           onClick={this._onClick}
         />
-        
+
       </div>
     );
   }
@@ -231,14 +231,13 @@ var UserMovie = React.createClass({
 //     return(
 //      <div className="col-sm-6" >
 //       <p></p>
-//         <img 
-//           src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path} 
-//           width="150" 
+//         <img
+//           src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path}
+//           width="150"
 //           onClick={this._onClick}
 //         />
-        
+
 //       </div>
 //     );
 //   }
 // });
-

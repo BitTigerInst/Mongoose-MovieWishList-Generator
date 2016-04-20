@@ -12,7 +12,7 @@ var Setup = React.createClass({
     if (movie.id in favs) {
       delete favs[movie.id];
     } else {
-      favs[movie.id] = movie; 
+      favs[movie.id] = movie;
     }
 
     this.setState({
@@ -36,7 +36,7 @@ var Setup = React.createClass({
   _next(){
     var page = this.state.page;
     if (page < 227) {
-      page += 1; 
+      page += 1;
     }
     $.get("/apis/get_movie?page="+page, function(data) {
       this.setState({
@@ -56,7 +56,7 @@ var Setup = React.createClass({
       success: function(){
         console.log(user_id);
         location.href = "/users/"+user_id;
-        
+
       }
     });
   },
@@ -66,16 +66,18 @@ var Setup = React.createClass({
       <div className="col-sm-12">
         <h1>Please pick your favorite movies</h1>
         <div className='col-sm-8'>
-         <button className='btn btn-info' onClick={this._prev}>Previouse Page</button>
-          <button className='btn btn-info' onClick={this._next}>Next Page</button>
+           <button className='btn btn-secondary btn-primary navbar-left' onClick={this._prev}>Previouse Page</button>
+            <button className='btn btn-secondary btn-primary navbar-right' onClick={this._next}>Next Page</button>
+
         </div>
-         <button className="btn btn-success" onClick={this._onSubmit}> Set Your List</button>
-        <List 
-          movies={this.state.movies} 
+
+         <button className="btn btn-success col-sm-offset-2" onClick={this._onSubmit}> Set Your List</button>
+        <List
+          movies={this.state.movies}
           updateFavs={this._updateFavs}
           favs={this.state.favs}
         />
-         <UserList 
+         <UserList
           updateFavs={this._updateFavs}
           favs={this.state.favs}
           authenticity_token={this.props.authenticity_token}
@@ -96,8 +98,8 @@ var List = React.createClass({
       <div className='col-sm-8'>
         {this.props.movies.map(function(movie, idx) {
           return (
-            <Movie 
-              key={'movie'+idx} 
+            <Movie
+              key={'movie'+idx}
               movie={movie}
               isFav={movie.id in this.props.favs}
               onClick={this._onClick}
@@ -110,7 +112,7 @@ var List = React.createClass({
 });
 
 var Movie = React.createClass({
-  
+
   _onClick(e) {
     this.props.onClick(this.props.movie);
   },
@@ -122,10 +124,10 @@ var Movie = React.createClass({
     };
     return(
       <div className="col-sm-6" >
-        <img 
-          src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path} 
+        <img
+          src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path}
           style={imgStyle}
-          width="300" 
+          width="300"
           onClick={this._onClick}
         />
       </div>
@@ -159,7 +161,7 @@ var UserList = React.createClass({
 })
 
 var UserMovie = React.createClass({
- 
+
   _onClick(e) {
     this.props.onClick(this.props.movie);
   },
@@ -168,12 +170,12 @@ var UserMovie = React.createClass({
     return(
      <div className="col-sm-6" >
       <p></p>
-        <img 
-          src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path} 
-          width="300" 
+        <img
+          src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path}
+          width="300"
           onClick={this._onClick}
         />
-        
+
       </div>
     );
   }
