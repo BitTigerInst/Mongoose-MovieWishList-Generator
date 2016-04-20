@@ -1,75 +1,4 @@
 <style>
-  #slider {
-  position: relative;
-  overflow: hidden;
-  margin: 20px auto 0 auto;
-  border-radius: 4px;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#slider ul {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  height: 200px;
-  list-style: none;
-}
-
-#slider ul li {
-  position: relative;
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-  width: 500px;
-  height: 300px;
-  text-align: center;
-  line-height: 300px;
-}
-
-a.control_prev, a.control_next {
-  position: absolute;
-  top: 40%;
-  z-index: 999;
-  display: block;
-  padding: 4% 3%;
-  width: auto;
-  height: auto;
-  background: #2a2a2a;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 18px;
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-a.control_prev:hover, a.control_next:hover {
-  opacity: 1;
-  -webkit-transition: all 0.2s ease;
-}
-
-a.control_prev {
-  border-radius: 0 2px 2px 0;
-}
-
-a.control_next {
-  right: 0;
-  border-radius: 2px 0 0 2px;
-}
-
-.slider_option {
-  position: relative;
-  margin: 10px auto;
-  width: 160px;
-  font-size: 18px;
-
-}
-td{
-  text-align: center;
-}
-
 #overview{
   background-color: white;
   padding: 5px;
@@ -78,52 +7,18 @@ td{
 }
 
 </style>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
+
+
 <script>
   $(document).ready(function ($) {
-
-  $('#checkbox').change(function(){
-    setInterval(function () {
-        moveRight();
-    }, 3000);
-  });
-
-  var slideCount = $('#slider ul li').length;
-  var slideWidth = $('#slider ul li').width();
-  var slideHeight = $('#slider ul li').height();
-  var sliderUlWidth = slideCount * slideWidth;
-
-  $('#slider').css({ width: slideWidth, height: slideHeight });
-
-  $('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-
-    $('#slider ul li:last-child').prependTo('#slider ul');
-
-    function moveLeft() {
-        $('#slider ul').animate({
-            left: + slideWidth
-        }, 200, function () {
-            $('#slider ul li:last-child').prependTo('#slider ul');
-            $('#slider ul').css('left', '');
-        });
-    };
-
-    function moveRight() {
-        $('#slider ul').animate({
-            left: - slideWidth
-        }, 200, function () {
-            $('#slider ul li:first-child').appendTo('#slider ul');
-            $('#slider ul').css('left', '');
-        });
-    };
-
-    $('a.control_prev').click(function () {
-        moveLeft();
+    $('.try_slider').slick({
+      arrows:true,
+      autoplay:true,
+      autoplaySpeed:1500
     });
-
-    $('a.control_next').click(function () {
-        moveRight();
-    });
-
 });
 </script>
 
@@ -140,14 +35,11 @@ td{
         </div>
         <div class="col-sm-6">
           <h3>take a peek</h3>
-          <div id="slider">
-            <a href="#" class="control_next">></a>
-            <a href="#" class="control_prev"><</a>
-            <ul>
-              <% @movie_images.each do |m|%>
-                <li><img src="http://image.tmdb.org/t/p/w500<%=m['file_path']%>" class="img-responsive"></li>
-              <%end%>
-            </ul>
+          <div class="try_slider">
+            <% @movie_images.each do |m|%>
+              <div><button type="button" class="slick-prev">Previous</button><img src="http://image.tmdb.org/t/p/w500<%=m['file_path']%>" class="img-responsive">
+              <button type="button" class="slick-next">Next</button></div>
+            <%end%>
           </div>
         </div>
 
@@ -176,8 +68,6 @@ td{
                     <% end %>
               </div>
             </div>
-
-
   </div>
   </div>
 </div>
